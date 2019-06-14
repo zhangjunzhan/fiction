@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>首页</title>
     <style>
-        *{margin: 0;padding: 0;}
+        *{margin: 0;padding: 0;list-style: none;}
         .clearfix{zoom:1;}
 	    .clearfix::after,.clearfix::before{content:'';display:block;width:0;height:0;visibility:hidden;clear:both;}
         a{text-decoration: none;}
         em,i,b{font-style: normal;}
-        span:hover{color: red;transition: .2s;}
+        span:hover{color: red;transition: .2s;cursor: pointer;}
         .hello{color: #ccc;font-size: 14px;}
         #search_btn:hover{opacity: .8;cursor: pointer;}
         #item{border-bottom: 1px solid}
@@ -22,6 +22,13 @@
         #txt_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;text-decoration:underline;}
         .txt_author{color: #ccc;}
         #txt_author:hover{color: #000;transition: .2s;}
+        #search_list_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;text-decoration:underline;}
+        .search_list_author{color: #ccc;}
+        #search_list_author:hover{color: lightskyblue;transition: .2s;cursor: pointer;text-decoration:underline;}
+        .add_bookcase{color: #ccc;}
+        .read{color:lightblue;}
+        #add_bookcase:hover{color: #fff;opacity: .8;transition: .5s;}
+        #read:hover{color: #fff;opacity: .8;transition: .5s;}
     </style>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -39,11 +46,7 @@
             </div>
         </div>
         <!-- 登录成功以后显示的 -->
-<<<<<<< HEAD
-        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px; display: none;" id="win">
-=======
         <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px; display: none;" id="xs_l">
->>>>>>> 2c3f1fdbb9206bc7ca28a259c6da116bc27b347e
             <div class="btn_box" style="float:right;">
                 <i class="hello">你好,</i>
                 <span id="name_z">xxx</span>
@@ -72,18 +75,13 @@
                             </div>
                         </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">登录</button>
+                        <button type="button" class="btn btn-primary" id="deng5">登录</button>
                     </div>
-                </div>
-<<<<<<< HEAD
-=======
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="deng5">登录</button>
->>>>>>> 2c3f1fdbb9206bc7ca28a259c6da116bc27b347e
+                </div>   
             </div>
         </div>
         <!-- 搜索框 -->
-        <div class="row" style="height: 50p;text-align: center;margin-top: 10px;">
+        <div class="row" style="height: 50px;text-align: center;margin-top: 10px;">
             <div class="col-md-6 col-md-offset-3" style="background: aqua;padding: 0;">
                 <input type="text" id="search_ipt" placeholder="不正经的搜索" style="height:40px;width: 100%;outline: none;font-size: 14px;padding-left: 10px;">
             </div>
@@ -111,15 +109,38 @@
                     <em class="txt_author" id="txt_author">人间失格</em>
                 </a> 
             </div>
-            <!-- ..........一条.............. --> 
+            <!-- ..........一条.............. -->
             <div class="col-md-4" style="background:gold;height: 300px;" id="item"></div>
             <div class="col-md-4" style="background: rgb(130, 204, 204);height: 300px;" id="item"></div>
             <div class="col-md-4" style="background: lightcoral;height: 300px;" id="item"></div>
             <div class="col-md-4" style="background: rgb(39, 7, 70);height: 300px;" id="item"></div>
             <div class="col-md-4" style="background: rgb(202, 194, 76);height: 300px;" id="item"></div>
         </div>
-        <!-- 搜索列表 -->
-
+        <!-- 搜索列表 默认不显示搜索之后显示-->
+        <ul class="row" style="width: 80%;margin: 0 auto;display: none" id="search_list">
+            <li class="col-md-12" style="height: 200px;background: orchid;padding: 0;">
+                <div class="col-md-2" style="height: 200px;background: aquamarine;padding: 10px;" id="search_list_img">
+                    <img src="" alt="" >
+                </div>
+                <div class="col-md-4">
+                    <h4 class="col-md-12" style="text-align: center;" id="search_list_names">李福星的穿越生活</h4>
+                    <p class="col-md-12" id="search_list_intro">
+                    　　行走在历史的长河，跨越时间的流逝。
+                    　　演绎史诗般的场景，重现昔日的荣耀，追寻神秘的力量，创造属于我们的篇章。
+                    　　穿梭于位面之间，哈利波特、加勒比海盗。。
+                    　　加入我们，我们是世界之敌。
+                    </p>
+                    <a href="#" class="col-md-12" style="text-decoration: none; font-size: 12px;color: #000;">
+                        作者:
+                        <em class="search_list_author" id="search_list_author">人间失格</em>
+                    </a> 
+                </div>
+                <div class="col-md-5" style="height: 200px;line-height: 340px;text-align: right;">
+                    <span style="text-align: center;padding: 10px;margin: 5px;background: #bf2c24;border: 1px solid #bf2c24;" class="add_bookcase" id="add_bookcase" >加入书架</span>
+                    <span style="text-align: center; padding: 10px;margin: 5px;border: 1px solid lightblue;" class="read" id="read">立即阅读</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </body>
     <script>
@@ -127,6 +148,10 @@
         //跳转注册页面
         btn_up.onclick=function(){
            location.href="login.html"
+        }
+        //跳转到个人中心
+        personal_center.onclick=function(){
+            location.href='personal_center'
         }
        //登录
         deng5.onclick = function(){

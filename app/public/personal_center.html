@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .clearfix{zoom:1;}
+	    .clearfix::after,.clearfix::before{content:'';display:block;width:0;height:0;visibility:hidden;clear:both;}
+        a{text-decoration: none;}
+        em,i,b{font-style: normal;}
+        #head_portrait img{width: 100%;height: 100%;}
+        /* #bookrack{background: tomato;} */
+        #bookrack:hover{color: white;transition: 1s;opacity: .7; cursor: pointer;}
+        /* #type_in{background: lightgreen;} */
+        #type_in:hover{color: white;transition: 1s;opacity: .7; cursor: pointer;}
+        /* #out{background: cornflowerblue;} */
+        #out:hover{color: white;transition: 1s;opacity: .7; cursor: pointer;}
+        #txt_img img{width: 100%;height: 100%;}
+        #txt_name{word-wrap:break-word;}
+        #txt_intro{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 7;overflow: hidden;}
+        #txt_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;text-decoration:underline;}
+        .txt_author{color: #ccc;}
+        #txt_author:hover{color: rgb(66, 0, 153);transition: .2s;text-decoration:underline;}
+        #txt_amend:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
+        #txt_delete:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
+        #txt_comment:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
+    </style>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="height: 80px;background: #ccc;padding: 0; line-height: 80px;margin-bottom: 10px;">
+            <!-- 头像 -->
+            <div class="col-md-1" style="height: 80px;width:80px;border-radius: 50%;background: aquamarine;padding: 0;margin-left: 200px;" id="head_portrait">
+                <!-- <img src="" alt=""> -->
+            </div>
+            <!-- 书架 -->
+            <span class="col-md-2 col-md-offset-1" style="text-align: center;line-height: 80px;font-size: 20px;padding: 0;" id="bookrack">我的书架</span>
+            <span class="col-md-1 col-md-offset-1" style="text-align: center;line-height: 80px;font-size: 20px;padding: 0;" id="type_in">录入</span>
+            <!-- 退出返回首页 -->
+            <span class="col-md-1 col-md-offset-3" style="text-align: center;line-height: 80px;font-size: 20px;padding: 0;" id="out">退出</span>
+        </div>
+        <!-- 书架 -->
+        <div class="row" style="min-height: 300px;border-bottom: 1px dashed #ccc;padding-bottom: 20px;" id="item_box">
+            <div class="col-md-12" style="padding:0;" id="item">
+                <div class="col-md-2" style="height: 280px;background: limegreen;margin: 10px;" id="txt_img">
+                    <!-- <img src="" alt=""> -->
+                </div>
+                <div class="col-md-3">
+                    <h3 class="col-md-12" id="txt_name">李富贵儿的快乐生活</h3>
+                    <p class="col-md-12" id="txt_intro">
+                        李富星携功法修改器重生入鬼怪世界，内妖魔浩瀚，诡谲无数，人族挣扎求生。
+                    　　末日前夕，鬼怪世界以游戏形式发售、面世。
+                    　　世人愚钝，不知打开了妖魔之门，当有一日，两界融合，妖魔鬼怪肆虐而来，伏尸万里，流血漂橹，掀开这末世画卷。
+                    　　李富星内测进入鬼怪世界，这一日，游戏尚未发售，玩家尚未进入，恐怖尚未影响现实……
+                    　　地狱空荡荡，厉鬼在人间。
+                    </p>
+                    <a href="#" class="col-md-12" style="text-decoration: none; font-size: 12px;color: #000;padding-top: 30px;">
+                        作者:
+                        <em class="txt_author" id="txt_author">人间失格</em>
+                    </a> 
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height: 300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                    <span id="txt_amend">修改</span>
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                    <span id="txt_comment">评论</span>
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                    <span id="txt_delete">删除</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+    <script>
+        out.onclick=function(){
+            location.href='index.html'
+        }
+        type_in.onclick=function(){
+            location.href='type_in.html'
+        }
+    </script>
+</html>
