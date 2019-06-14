@@ -25,13 +25,13 @@
     <div class="container">
         <!-- 默认显示的登录 -->
         <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px;">
-            <div class="btn_box" style="float:right;">
+            <div class="btn_box" style="float:right;" id="yc_l">
                 <span id="btn_in" data-toggle="modal" data-target="#enter">登录</span>
                 / <span id="btn_up">注册</span>
             </div>
         </div>
         <!-- 登录成功以后显示的 -->
-        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px; display: none;">
+        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px; display: none;" id="xs_l">
             <div class="btn_box" style="float:right;">
                 <i class="hello">你好,</i>
                 <span id="name_z">xxx</span>
@@ -59,15 +59,57 @@
                     </div>
                 </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">登录</button>
+                <button type="button" class="btn btn-primary" id="deng5">登录</button>
             </div>
         </div>
     </div>
 </body>
     <script>
+        var href = 'http://localhost:8000';
         //跳转注册页面
-       btn_up.onclick=function(){
+        btn_up.onclick=function(){
            location.href="login.html"
-       }
+        }
+       //登录
+        deng5.onclick = function(){
+        // alert(1)
+            // $.ajax([url, ][settings])
+            $.ajax({
+                url:href+'/users/ins',
+                type:'post',
+                data:{
+                    user:user_in.value,
+                    pass:pass_in.value
+                },
+                success(data){
+                    console.log(data)
+                    if(data=='ok'){
+                        alert('账号密码不匹配')
+                    }else{
+                        alert('登录成功')
+                        localStorage.login = JSON.stringify(data)
+                        console.log(localStorage.login);
+                        $('#enter').modal('hide');
+                        yc_l.style.display='none';
+                        xs_l.style.display='block';
+                        name_z.innerText=`${data.names}`
+
+                    }
+                }
+            })
+        }
+        //退出登录
+        btn_out.onclick = function(){
+            yc_l.style.display='block';
+            xs_l.style.display='none'; 
+        }
+        if(localStorage.login){
+             yc_l.style.display='none';
+            xs_l.style.display='block';
+            var login_data = JSON.parse(localStorage.login);
+            console.log(login_data)
+             name_z.innerText=login_data.names
+
+        }
     </script>
 </html>
