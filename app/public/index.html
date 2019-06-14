@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        .clearfix{zoom:1;}
+	    .clearfix::after,.clearfix::before{content:'';display:block;width:0;height:0;visibility:hidden;clear:both;}
+        a{text-decoration: none;}
+        em,i{font-style: normal;}
+        span:hover{color: red;transition: .2s;}
+        .hello{color: #ccc;font-size: 14px;}
+
+    </style>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 默认显示的登录 -->
+        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px;">
+            <div class="btn_box" style="float:right;">
+                <span id="btn_in" data-toggle="modal" data-target="#enter">登录</span>
+                / <span id="btn_up">注册</span>
+            </div>
+        </div>
+        <!-- 登录成功以后显示的 -->
+        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px; display: none;">
+            <div class="btn_box" style="float:right;">
+                <i class="hello">你好,</i>
+                <span id="name_z">xxx</span>
+                / <span id="btn_out">退出</span>
+            </div>
+        </div>
+        <!-- 登录的模态框 -->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="enter">
+        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">登录</h4>
+            </div>
+                <div class="modal-body">
+                    <!-- 账号 -->
+                    <div class="form-group">
+                        <label for="user" class="control-label">账号</label>
+                        <input type="text" class="form-control" id="user_in"placeholder="账号">
+                    </div>
+                    <!-- 密码 -->
+                    <div class="form-group">
+                        <label for="pass" class="control-label">密码</label>
+                        <input type="password" class="form-control" id="pass_in"placeholder="密码">
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">登录</button>
+            </div>
+        </div>
+    </div>
+</body>
+    <script>
+        //跳转注册页面
+       btn_up.onclick=function(){
+           location.href="login.html"
+       }
+    </script>
+</html>
