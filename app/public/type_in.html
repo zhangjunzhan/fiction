@@ -53,8 +53,11 @@
         #btn-i{width: 120px;height: 40px;margin-left: 43%;margin-top: 30px;}
         .zzz{padding: 20px 0}
         .box{display: none}
-
-
+        #zzz img{
+          width: 80px;
+          height: 100px;
+        }
+  
 
 
     </style>
@@ -100,9 +103,11 @@
             <div class="zzz">小说名字:<input type="text" id="add_name"></div>
             <!-- 小说作者 -->
             <div class="zzz">小说作者:<input type="text" id="add_author"></div>
+            <!-- 小说章节 -->
+            <div class="zzz">小说章节:<input type="text" id="add_zhangjie"></div>
             <!-- 小说封面 -->
             <div class="zzz" id="zzz">
-                <img src="../public/file/2ece9a2521d40e90c43d40b7e4b8ce5e.jpg" alt="" width="80px;"height="100px;">
+                <img src="../public/file/9852994836b71adf6f86ced03422a90c.jpg" alt="" width="80px;"height="100px;">
                 小说封面:<input type="file" accept="image/*" id="add_img">
             </div>
             <!-- 富文本 -->
@@ -299,5 +304,95 @@ function getSize(p) {
     return {}
   }
 }
+    </script>
+    <script type="text/javascript">
+      var href = 'http://localhost:8000';
+      var img_url = '';
+      var login_data = JSON.parse(localStorage.login);
+      console.log(login_data)
+      //小说封面
+      add_img.onchange=function(){
+        alert(1);
+        var f = add_img.files[0];
+        var d = new FormData;
+        d.append('img',f)
+        $.ajax({
+          url:href+'/files/img',
+            type:'post',
+                data:d,
+                processData:false,
+                contentType:false,
+                success(data){
+                    console.log(data)
+                   img_url = href+data;
+                    zzz.innerHTML = `<img src='${href}${data}'>`
+                }
+        })
+      }
+      //小说录入
+      add_uploading.onclick = function(){
+        // alert(1)
+        $.ajax({
+          url:href+'/users/entering',
+          type:'post',
+          data:{
+            xs_name:add_name.value,
+            xs_author:add_author.value,
+            xs_cover:img_url,
+            xs_content:$('#editBox').text(),
+            xs_uid:login_data.uid,
+            xs_zj:add_zhangjie.value
+          },
+          success(data){
+            console.log(data)
+            if(data == 'ok'){
+              alert('录入成功');
+              add_box.style.display='none';
+              item_box.style.display='block'
+
+            }else{
+              alert('录入失败')
+            }
+          }
+        })
+      }
+      //自己录入的小说
+      $.ajax({
+        url:href+'/users/zl',
+        type:'get',
+        data:{
+           xs_uid:login_data.uid
+         },
+         success(data){
+          console.log(data)
+          var str = '';
+          for(var i=0;i<data.length;i++){
+            str+=`
+              <div class="bar" id="bar">
+                <div class="item clearfix" id="item">
+                    <div class="img fl" id="img">
+                        <img src="${data[i].xs_cover}" alt="">
+                    </div>
+                    <!-- 信息 -->
+                    <div class="messages fl" style="margin: 0 20px;" id="messages">
+                        <h4 class="txt_title" id="txt_title">${data[i].xs_name}</h4>
+                        <p class="txt_intro" id="txt_intro">
+                           ${data[i].xs_content}
+                        </p>
+                        <p class="author" id="author">作者：<a href="#"><span class="txt_author" id="txt_author">${data[i].xs_author}</span></a></p>
+                    </div>
+                    <!-- 功能 -->
+                    <div class="function fl">
+                        <span class="alter" id="alter">修改</span>
+                        <span class="delete" id="delete">删除</span>
+                    </div> 
+                </div>
+                <div class="line" id="line"></div>
+            </div>
+            `
+          }
+          item_box.innerHTML=str
+         }
+      })
     </script>
 </html>

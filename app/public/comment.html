@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>评论</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="jquery.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+         *{margin: 0;padding: 0;list-style: none;}
+        .clearfix{zoom:1;}
+	    .clearfix::after,.clearfix::before{content:'';display:block;width:0;height:0;visibility:hidden;clear:both;}
+        .fl{float: left;}
+        .fr{float: right;}
+        a{text-decoration: none;}
+        em,i,b{font-style: normal;}
+        .content{width: 60%;margin: 0 auto;}
+        .txt{height: 380px; position: relative;border-bottom: 1px solid;}
+        .Img{width: 200px;height: 300px;padding: 40px;}
+        .Img img{width: 100%;height: 100%;}
+        .message{width: 400px;}
+        .txt_name{padding:40px 0 20px 0}
+        .txt_intro{padding-top: 20px;font-size: 12px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;}
+        .txt_author{color: #000;}
+        .txt_author:hover{color: red;transition: .5s;}
+        .number{position: absolute;top: 15px;right: 10px;}
+        .num{color: cornflowerblue;font-size: 10px;}
+        .section{}
+        .section li{float: left;width: 270px;padding: 10px 0 10px 0;border-bottom: 1px dashed;}
+        .section li:hover{color: red;transition: .3s;cursor: pointer;}
+        .mulu{padding: 5px 10px;background: rgb(13, 77, 77);color:white}
+        .mulu:hover{cursor: pointer;opacity: .6;}
+        .pinglun{padding: 5px 10px;background: darkcyan; color: white;}
+        .pinglun:hover{cursor: pointer;opacity: .6;}
+        .discuss_list{}
+        .discuss_list li{min-height: 100px;border-bottom: 1px dashed;padding-bottom: 20px;padding-top: 20px;}
+        .discuss_img{width: 50px;height: 50px;border-radius: 50%;position: relative;}
+        .discuss_img img{width: 100%;height: 100%;border-radius: 50%;}
+        #user_name{position: absolute;top: 14px;right: -50px;}
+        .discuss_txt{text-indent: 4em;padding-top: 10px;}
+        .add_discuss{background: #ccc;padding: 5px;font-size: 15px;cursor: pointer;}
+        #Img img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">
+        <!-- 当前小说的详情 -->
+        <div class="txt clearfix" id="txt">
+            <div class="img fl" id="Img">
+                <!-- <img src="./file/2ece9a2521d40e90c43d40b7e4b8ce5e.jpg" alt=""> -->
+            </div>
+            <div class="message fl" id="message" >
+                <h3 class="txt_name" id="txt_name">小说名字</h3>
+                <div style="font-size: 14px;"><a href="#" class="txt_author" id="txt_author">人间失格</a>&nbsp;&nbsp;&nbsp;&nbsp;著</div>
+                <p class="txt_intro" id="txt_intro">修仙觅长生，热血任逍遥，踏莲曳波涤剑骨，凭虚御风塑圣魂！</p>
+                <div class="number" style="font-size: 14px;"><span class="num" id="num">15</span> 人评价</div>
+            </div>
+        </div>
+        <!-- 目录  评论 -->
+        <div class="select" style="margin-top: 10px;margin-bottom: 30px;">
+            <span class="mulu" id="mulu">目录</span>
+            <span class="pinglun" id="pinglun">评论</span>
+        </div>
+        <!-- 目录 -->
+        <ul class="section" id="section" style="display:none;">
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+            <li>第<span class="section_num" id="section_num">一</span>章&nbsp;天神下凡5锤1</li>
+        </ul>
+        <!-- 添加评论 -->
+        <div class="add_discuss fr" data-toggle="modal" data-target="#add_discuss" id="discuss_add">添加评论</div>
+         <!-- 添加评论模态框 -->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="add_discuss">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">不正经评论</h4>
+                    </div>
+                        <div class="modal-body">
+                            <!-- 评论 -->
+                            <div class="form-group">
+                                <label for="user" class="control-label">评论</label>
+                                <div contenteditable="true" id="review" style="border: 1px solid;min-height: 200px;"></div>
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="discuss_btn">评论</button>
+                    </div>
+                </div>   
+            </div>
+        </div>
+        <!-- 评论 -->
+        <ul class="discuss_list" id="discuss_list">
+           <!--  <li class="clearfix">
+                <div class="discuss_img">
+                    <img src="./file/8d841021e4ff2874203a2b3912930d1d.jpg" alt="">
+                    <span id="user_name">名字</span>
+                </div>
+                <div class="discuss_txt">
+                    我去饿开机即可那就，可能考虑我打了hi 我去饿开机即可那就，可能考虑我打了hi 我去饿开机即可那就，可能考虑我打了hi 我去饿开机即可那就，可能考虑我打了hi 我去饿开机即可那就，可能考虑我打了hi
+                </div>
+            </li> -->
+            
+        </ul>
+    </div>
+</body>
+    <script>
+        var href = 'http://localhost:8000';
+        var login_data = JSON.parse(localStorage.login);
+        console.log(login_data)
+        var str = location.href.split('?')[1];
+        var str1 =decodeURI(str);
+        // console.log(str1)
+        var json = {};
+       
+        var arr2 = str1.split('&')  
+        console.log(arr2)
+        for(var j=0;j<arr2.length;j++){
+           var arr3 = arr2[j].split('=') 
+           json[arr3[0]] = arr3[1]
+        }
+        console.log(json)
+        Img.innerHTML=` <img src="${login_data.img}" alt="" style="width:200px;height:300px">
+        `
+        txt_name.innerHTML =`${json.mz}`
+        txt_author.innerHTML = `${json.zz}`
+        txt_intro.innerHTML = `${json.nr}`
+        discuss_btn.onclick = function(){
+            // alert(1)
+            $.ajax({
+                url:href+'/users/comment',
+                type:'post',
+                data:{
+                    img:login_data.img,
+                    mz:json.zz,
+                    nr:$('#review').text(),
+                    loginuid:login_data.uid
+                },
+                success(data){
+                    console.log(data)
+                    if(data=='ok'){
+                        alert('评论成功')
+                    }
+                }
+            })
+        }
+        //评论大厅
+        $.ajax({
+            url:href+'/users/pldt',
+            type:'get',
+            success(data){
+                console.log(data);
+                var str=''
+                for(var i=0;i<data.length;i++){
+                    str+=`
+                        <li class="clearfix">
+                <div class="discuss_img">
+                    <img src="${data[i].img}" alt="">
+                    <span id="user_name">${data[i].mz}</span>
+                </div>
+                <div class="discuss_txt">
+                    ${data[i].nr}
+                </div>
+           </li>
+                    `
+                }
+                discuss_list.innerHTML = str
+            }
+        })
+    </script>
+</html>

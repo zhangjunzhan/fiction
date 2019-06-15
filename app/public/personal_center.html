@@ -27,6 +27,11 @@
         #txt_amend:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
         #txt_delete:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
         #txt_comment:hover{color: rgb(223, 19, 19);transition: .2s;cursor: pointer;}
+        #head_portrait img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%
+        }
     </style>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -49,44 +54,84 @@
         </div>
         <!-- 书架 -->
         <div class="row" style="min-height: 300px;border-bottom: 1px dashed #ccc;padding-bottom: 20px;" id="item_box">
-            <div class="col-md-12" style="padding:0;" id="item">
-                <div class="col-md-2" style="height: 280px;background: limegreen;margin: 10px;" id="txt_img">
-                    <!-- <img src="" alt=""> -->
-                </div>
-                <div class="col-md-3">
-                    <h3 class="col-md-12" id="txt_name">李富贵儿的快乐生活</h3>
-                    <p class="col-md-12" id="txt_intro">
-                        李富星携功法修改器重生入鬼怪世界，内妖魔浩瀚，诡谲无数，人族挣扎求生。
-                    　　末日前夕，鬼怪世界以游戏形式发售、面世。
-                    　　世人愚钝，不知打开了妖魔之门，当有一日，两界融合，妖魔鬼怪肆虐而来，伏尸万里，流血漂橹，掀开这末世画卷。
-                    　　李富星内测进入鬼怪世界，这一日，游戏尚未发售，玩家尚未进入，恐怖尚未影响现实……
-                    　　地狱空荡荡，厉鬼在人间。
-                    </p>
-                    <a href="#" class="col-md-12" style="text-decoration: none; font-size: 12px;color: #000;padding-top: 30px;">
-                        作者:
-                        <em class="txt_author" id="txt_author">人间失格</em>
-                    </a> 
-                </div>
-                <div class="col-md-1 col-md-offset-1" style="height: 300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
-                    <span id="txt_amend">修改</span>
-                </div>
-                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
-                    <span id="txt_comment">评论</span>
-                </div>
-                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
-                    <span id="txt_delete">删除</span>
-                </div>
-            </div>
+            
         </div>
 
     </div>
 </body>
     <script>
+        var href = 'http://localhost:8000';
         out.onclick=function(){
             location.href='index.html'
         }
         type_in.onclick=function(){
             location.href='type_in.html'
         }
+        if(localStorage.login){
+            var login_data = JSON.parse(localStorage.login);
+            console.log(login_data)
+            head_portrait.innerHTML =`<img src="${login_data.img}">`
+
+        }
+      //书架列表
+      $.ajax({
+        url:href+'/users/bookrack_list',
+        type:'get',
+        success(data){
+            console.log(data);
+            var str = '';
+            for(var i=0;i<data.length;i++){
+                str+=`
+                    <div class="col-md-12" style="padding:0;" id="item">
+                <div class="col-md-2" style="height: 280px;background: limegreen;margin: 10px;" id="txt_img">
+                  <img src="${data[i].xsimg}" alt="">
+                </div>
+                <div class="col-md-3">
+                    <h3 class="col-md-12" id="txt_name">${data[i].xsname}</h3>
+                    <p class="col-md-12" id="txt_intro">
+                       ${data[i].xstext}
+                    </p>
+                    <a href="#" class="col-md-12" style="text-decoration: none; font-size: 12px;color: #000;padding-top: 30px;">
+                        作者:
+                        <em class="txt_author" id="txt_author">${data[i].xsauthor}</em>
+                    </a> 
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height: 300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                    <span id="txt_amend">修改</span>
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                   <a href='comment.html?mz=${data[i].xsname}&zz=${data[i].xsauthor}&nr=${data[i].xstext}'> <span id="txt_comment">评论</span></a>
+                </div>
+                <div class="col-md-1 col-md-offset-1" style="height:300px;padding: 0;text-align: center;line-height: 280px;font-size: 20px;">
+                    <span id="txt_delete" onclick='abc("${data[i].uid}")'>删除</span>
+                </div>
+            </div>
+                `
+            }
+            item_box.innerHTML=str
+        }
+      })
+      // abc()
+      // 删除
+      function abc(a){
+        // alert(1)
+        $.ajax({
+            url:href+'/users/delete',
+            type:'get',
+            data:{
+                uid:a
+            },
+            success(data){
+                console.log(data)
+                // abc()
+                location.href='personal_center.html'
+            }
+        })
+      }
+      //评论
+      // function comment(){
+      //   // alert(1)
+      //   location.href='comment.html'
+      // }
     </script>
 </html>
