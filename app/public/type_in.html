@@ -1,12 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ch">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>录入</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        .clearfix{zoom:1;}
+        .clearfix::after,.clearfix::before{content:'';display:block;width:0;height:0;visibility:hidden;clear:both;}
+        .fl{float: left;}
+        .fr{float: right;}
+        a{text-decoration: none;}
+        em,i{font-style: normal;}
+        .container{width: 60%;margin: 0 auto;}
+        .title{height: 80px;background:#ccc;font-size: 30px;text-align: center;line-height: 80px;color: cornflowerblue;position: relative;}
+        .add{position: absolute;top: 0px;right: 20px;font-size: 40px;color: black;}
+        .add:hover{color: coral;transition: .8s;cursor: pointer;}
+        .out{position: absolute;top: 0;left: 20px;font-size: 14px;color: #000;}
+        .out:hover{color: rgb(235, 60, 60);cursor: pointer;transition: .4s;}
+        .out_item_box{position: absolute;top: 0;left: 20px;font-size: 14px;color: #000;}
+        .out_item_box:hover{color: rgb(235, 60, 60);cursor: pointer;transition: .4s;}
+        .item{height: 200px;padding-top: 10px;;}
+        .img{width:140px;height: 200px; background: hotpink;}
+        .img img{width: 100%;height: 100%;padding: 10px;border-radius: 15px;}
+        .txt_title{width: 300px;text-align: center;}
+        .txt_intro{width: 300px;text-align: center;font-size: 14px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;text-indent:2em;}
+        .txt_intro:hover{color: rgb(160, 13, 13);transition: .5s;text-decoration: underline;}
+        .author{font-size: 12px;padding-top: 40px;}
+        .txt_author{color: #ccc;}
+        .txt_author:hover{color:red;transition: .5s;text-decoration: underline;}
+        .function{height:200px;line-height: 200px;}
+        .function >span{margin: 0 30px;padding: 10px;background: rgb(146, 29, 29);color: white;}
+        .function >span:hover{cursor: pointer;opacity: .8;transition: .5s;}
+        .line{border-bottom: 1px dashed;padding-top: 20px;}
+        /* 富文本 */
+        .content{width: 100%;min-height: 200px;margin-left: auto;margin-right: auto;border: 1px solid #eee;}
+		.header {padding: 6px 0;margin: 0 4px;border-bottom: 1px solid #ccc;font-size: 14px;color: #666;}
+        .input-box {width: 16px;height: 20px;}
+		.box {padding: 10px;min-height: 200px;outline: none}
+		.input-img {height: 16px;line-height: 16px;}
+		.img-box {float: right;}
+		.ry-upload {float: right; margin-right: 10px;overflow: hidden;width: 20px;height: 18px;position: relative;border: 1px dashed #ddd;transition: all .5s ease;cursor: pointer;}
+		.btn-inner {position: absolute;z-index: 1;margin: auto;left: 0;right: 0; top: 0;bottom: 0;width: 20px;height: 20px;line-height: 18px;color: #888;font-size: 18px;text-align: center;}
+        .btn-file {position: absolute;z-index: 11;margin: auto;left: 0;right: 0;top: 0;bottom: 0;width: 20px;height: 20px;line-height: 20px;opacity: 0.01;}
+        .font-size-box {appearance:none;-moz-appearance:none;-webkit-appearance:none;padding: 0 6px;border-radius: 0;background-color: #fff;}
+        .con-bon{width: 100%;min-height: 500px;background: greenyellow;margin-top: 30px;}
+        .oul{list-style-type: none;margin-left: 50px;}
+        .oul li{height: 200px;background: red;}
+        .oul li img{width: 100px;height: 150px;}
+        .con-tnt{width: 100%;padding-left: 2px;}
+        #btn-i{width: 120px;height: 40px;margin-left: 43%;margin-top: 30px;}
+        .zzz{padding: 20px 0}
+        .box{display: none}
+
+
+
+
+    </style>
+    <script src="jquery.js"></script>
 </head>
 <body>
+    <div class="container">
+        <!-- 标题 -->
+        <p class="title">
+            <span class="out_item_box" id="out_item_box">返回</span>
+            <span class="out" id="out">返回个人中心</span>
+            小说录入
+            <span class="add" id="add">+</span></p>
+        <div class="item_box" id="item_box">
+            <!-- 每一条 -->
+            <div class="bar" id="bar">
+                <div class="item clearfix" id="item">
+                    <div class="img fl" id="img">
+                        <img src="../public/file/000083377227a69210c65319b72866e4.jpg" alt="">
+                    </div>
+                    <!-- 信息 -->
+                    <div class="messages fl" style="margin: 0 20px;" id="messages">
+                        <h4 class="txt_title" id="txt_title">掉头发的苦逼生活</h4>
+                        <p class="txt_intro" id="txt_intro">
+                            某天，宋书航意外加入了一个仙侠中二病资深患者的交流群，里面的群友们都以‘道友’相称，群名片都是各种府主、洞主、真人、天师。连群主走失的宠物犬都称为大妖犬离家出走。整天聊的是炼丹、闯秘境、炼功经验啥的。
+                            突然有一天，潜水良久的他突然发现……群里每一个群员，竟然全部是修真者，能移山倒海、长生千年的那种！
+                            啊啊啊啊，世界观在一夜间彻底崩碎啦！
+                        </p>
+                        <p class="author" id="author">作者：<a href="#"><span class="txt_author" id="txt_author">人间失格</span></a></p>
+                    </div>
+                    <!-- 功能 -->
+                    <div class="function fl">
+                        <span class="alter" id="alter">修改</span>
+                        <span class="delete" id="delete">删除</span>
+                    </div> 
+                </div>
+                <div class="line" id="line"></div>
+            </div>
+        </div>
+        <!-- 添加小说 -->
+        <div class="box" id="add_box">
+            <!-- 小说名字 -->
+            <div class="zzz">小说名字:<input type="text" id="add_name"></div>
+            <!-- 小说作者 -->
+            <div class="zzz">小说作者:<input type="text" id="add_author"></div>
+            <!-- 小说封面 -->
+            <div class="zzz" id="zzz">
+                <img src="../public/file/2ece9a2521d40e90c43d40b7e4b8ce5e.jpg" alt="" width="80px;"height="100px;">
+                小说封面:<input type="file" accept="image/*" id="add_img">
+            </div>
+            <!-- 富文本 -->
+            <div class='content' id="content">
+                <header class='header'>
+                    <select id='fontSize' defaultValue='3' class='font-size-box'>
+                        <option value="3">3号字</option>
+                        <option value="1">1号字</option>
+                        <option value="2">2号字</option>
+                        <option value="4">4号字</option>
+                        <option value="5">5号字</option>
+                        <option value="6">6号字</option>
+                        <option value="7">7号字</option>
+                    </select>
+                    <span>字体颜色:</span>
+                    <input type="color" class="input-box"  id='fontColor'/>
+                    <span>字体背景色:</span>
+                    <input type="Color" class="input-box" id='bgColor'/>
+                    <div class="img-box">
+                        <input type="image" src="./img/格式刷.png" class="input-img" onclick='textChange("removeFormat")'/>
+                        <input type="image" src="./img/left.png" class="input-img" onclick='textChange("justifyLeft")'/>
+                        <input type="image" src="./img/justify.png" class="input-img" onclick='textChange("justifyFull")'/>
+                        <input type="image" src="./img/center.png" class="input-img" onclick='textChange("justifyCenter")'/>
+                        <input type="image" src="./img/right.png" class="input-img" onclick='textChange("justifyRight")'/>
+                        <input type="image" src="./img/B.png" class="input-img" onclick='textChange("bold")'/>
+                        <input type="image" src="./img/I.png" class="input-img" onclick='textChange("italic")'/>
+                        <input type="image" src="./img/删除线.png" class="input-img" onclick='textChange("strikeThrough")'/>
+                        <input type="image" src="./img/下划线.png" class="input-img" onclick='textChange("underline")'/>
+                        <input type="image" src="./img/重做.png" class="input-img" onclick='textChange("redo")'/>
+                        <input type="image" src="./img/撤销.png" class="input-img" onclick='textChange("undo")'/>
+                    </div>
+                    <div class="ry-upload">
+                        <p class="btn-inner">
+                            +
+                        </p>
+                        <input type="file"  id='file' accept="image/*" class="btn-file"/>
+                    </div>
+                    <div class="ry-upload">
+                        <p class="btn-inner">
+                            <img src='./img/timg.jpeg' height="20px"/>
+                        </p>
+                        <input type="file" class="btn-file" accept="video/*"  id='video'/>
+                    </div>
+                </header>
+                <div contenteditable="true" class='box' id='editBox'>
+                    
+                </div>
+            </div>
+            <div class="fr" style="width: 60px;height: 30px;background: paleturquoise;text-align: center;line-height: 30px;color: slategray;margin-top: 20px;" id="add_uploading">上传</div>
+        </div>
+    </div>
     
 </body>
+    <script>
+        out.onclick=function(){
+            location.href='personal_center.html'
+        }
+        add.onclick=function(){
+            item_box.style.display='none';
+            add_box.style.display='block';
+            out.style.display='none';
+            out_item_box.style.display='block';
+        }
+        out_item_box.onclick=function(){
+            out_item_box.style.display='none';
+            out.style.display='block';
+            item_box.style.display='block';
+            add_box.style.display='none'
+        }
+
+        //富文本
+ $(function(){
+  $(document).keydown(function(event){
+    let key = event.keyCode
+    if(key === 37 || key === 38 || key === 39 || key === 40) {
+      changePositon(event)
+    }
+  })
+  $('#editBox').on('click',function(e) {
+    changePositon(e)
+  })
+  $('#fontColor').on('input',function(e) {
+    textChange('foreColor',e.target.value)
+  })
+  $('#bgColor').on('input',function(e) {
+    textChange('hiliteColor',e.target.value)
+  })
+  $('#fontSize').on('input',function(e) {
+    textChange('fontSize',e.target.value)
+  })
+  $('#file').on('input',function(e) {
+    e.preventDefault()
+    const files = e.target.files[0]
+    if(files) {
+      image2base64(files, (data) => {
+        var pic = `<img src="data:image/jpeg;base64${data}" />`
+        textChange('insertHTML', pic)
+      })
+    }
+  })
+  $('#video').on('input',function(e) {
+    e.preventDefault()
+    const files = e.target.files[0]
+    if(files) {
+      getvideo(files, (data) => {
+        var pic = `<video src=${data} controls="controls">`
+        textChange('insertHTML', pic)
+      })
+    }
+  })
+});
+function textChange(a, b) {
+  var isFocus=$("#editBox").is(":focus");
+  isFocus ? null : $('#editBox').focus();
+  b ?
+  document.execCommand(a, false, b)
+  :
+  document.execCommand(a, true, null)
+}
+function image2base64(file, cb) {
+  const reader = new FileReader()
+  reader.onloadend = function () {
+    cb && cb(this.result)
+  }
+  reader.readAsDataURL(file)
+}
+function getvideo(file, cb) {
+  // 建议判断下视频大小及格式，太大的可能会有问题
+    const reader = new FileReader();
+    reader.onload = function (evt) {
+      cb && cb(evt.target.result)
+    }
+    reader.readAsDataURL(file);
+}
+//改变光标位置
+function changePositon(e) {
+  var range = document.getSelection()
+  if(range && range.focusNode.data ) {
+    let t = range.focusNode.data
+    let p = range.focusNode.parentElement
+    let size = p.size
+    let color = p.color
+    let bgColor = p.style.backgroundColor
+    if(!color) {
+      color = getColor(p)
+    }
+    if(!size) {
+      size = getSize(p)
+    }
+    if(!bgColor) {
+      bgColor = getBgColor(p)
+    }
+    $('#fontSize').val(size || 3)
+    $('#fontColor').val(color || '#000000')
+    $('#bgColor').val(bgColor || '#000000')
+  }
+}
+function getBgColor(p) {
+  let c
+  if(p.parentElement) {
+    c = p.parentElement.style.backgroundColor
+    if(c) {
+      return c
+    }else {
+      getColor(p.parentElement)
+    }
+  }else {
+    return {}
+  }
+}
+function getColor(p) {
+  let c
+  if(p.parentElement) {
+    c = p.parentElement.color
+    if(c) {
+      return c
+    }else {
+      getColor(p.parentElement)
+    }
+  }else {
+    return {}
+  }
+}
+function getSize(p) {
+  let s
+  if(p.parentElement) {
+    s = p.parentElement.size
+    if(s) {
+      return s
+    }else {
+      getSize(p.parentElement)
+    }
+  }else {
+    return {}
+  }
+}
+    </script>
 </html>
