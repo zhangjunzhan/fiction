@@ -24,8 +24,8 @@
         .item{height: 200px;padding-top: 10px;;}
         .img{width:140px;height: 200px;}
         .img img{width: 100%;height: 100%;padding: 10px;border-radius: 15px;}
-        .txt_title{width: 300px;text-align: center;}
-        .txt_intro{width: 300px;text-align: center;font-size: 14px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;text-indent:2em;}
+        .txt_title{width: 300px;}
+        .txt_intro{width: 300px;font-size: 14px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;text-indent:2em;}
         .txt_intro:hover{color: rgb(160, 13, 13);transition: .5s;text-decoration: underline;}
         .author{font-size: 12px;padding-top: 40px;}
         .txt_author{color: #ccc;}
@@ -36,13 +36,13 @@
         .line{border-bottom: 1px dashed;padding-top: 20px;}
         /* 富文本 */
         .content{width: 100%;min-height: 200px;margin-left: auto;margin-right: auto;border: 1px solid #eee;}
-		.header {padding: 6px 0;margin: 0 4px;border-bottom: 1px solid #ccc;font-size: 14px;color: #666;}
-        .input-box {width: 16px;height: 20px;}
-		.editBox {padding: 10px;min-height: 200px;outline: none}
-		.input-img {height: 16px;line-height: 16px;}
-		.img-box {float: right;}
-		.ry-upload {float: right; margin-right: 10px;overflow: hidden;width: 20px;height: 18px;position: relative;border: 1px dashed #ddd;transition: all .5s ease;cursor: pointer;}
-		.btn-inner {position: absolute;z-index: 1;margin: auto;left: 0;right: 0; top: 0;bottom: 0;width: 20px;height: 20px;line-height: 18px;color: #888;font-size: 18px;text-align: center;}
+    		.header {padding: 6px 0;margin: 0 4px;border-bottom: 1px solid #ccc;font-size: 14px;color: #666;}
+            .input-box {width: 16px;height: 20px;}
+    		.editBox {padding: 10px;min-height: 200px;outline: none}
+    		.input-img {height: 16px;line-height: 16px;}
+    		.img-box {float: right;}
+    		.ry-upload {float: right; margin-right: 10px;overflow: hidden;width: 20px;height: 18px;position: relative;border: 1px dashed #ddd;transition: all .5s ease;cursor: pointer;}
+    		.btn-inner {position: absolute;z-index: 1;margin: auto;left: 0;right: 0; top: 0;bottom: 0;width: 20px;height: 20px;line-height: 18px;color: #888;font-size: 18px;text-align: center;}
         .btn-file {position: absolute;z-index: 11;margin: auto;left: 0;right: 0;top: 0;bottom: 0;width: 20px;height: 20px;line-height: 20px;opacity: 0.01;}
         .font-size-box {appearance:none;-moz-appearance:none;-webkit-appearance:none;padding: 0 6px;border-radius: 0;background-color: #fff;}
         .con-bon{width: 100%;min-height: 500px;background: greenyellow;margin-top: 30px;}
@@ -76,7 +76,7 @@
             <div class="bar" id="bar">
                 <div class="item clearfix" id="item">
                     <div class="img fl" id="img">
-                        <img src="../public/file/000083377227a69210c65319b72866e4.jpg" alt="">
+                        <!-- <img src="../public/file/000083377227a69210c65319b72866e4.jpg" alt=""> -->
                     </div>
                     <!-- 信息 -->
                     <div class="messages fl" style="margin: 0 20px;" id="messages">
@@ -91,7 +91,7 @@
                     <!-- 功能 -->
                     <div class="function fl">
                         <span class="alter" id="alter">修改</span>
-                        <span class="delete" id="delete">删除</span>
+                        <span class="delete" id="deletes">删除</span>
                     </div> 
                 </div>
                 <div class="line" id="line"></div>
@@ -107,7 +107,7 @@
             <div class="zzz">小说章节:<input type="text" id="add_zhangjie"></div>
             <!-- 小说封面 -->
             <div class="zzz" id="zzz">
-                <img src="../public/file/9852994836b71adf6f86ced03422a90c.jpg" alt="" width="80px;"height="100px;">
+                <!-- <img src="../public/file/9852994836b71adf6f86ced03422a90c.jpg" alt="" width="80px;"height="100px;"> -->
                 小说封面:<input type="file" accept="image/*" id="add_img">
             </div>
             <!-- 富文本 -->
@@ -382,8 +382,7 @@ function getSize(p) {
                     </div>
                     <!-- 功能 -->
                     <div class="function fl">
-                        <span class="alter" id="alter">修改</span>
-                        <span class="delete" id="delete">删除</span>
+
                     </div> 
                 </div>
                 <div class="line" id="line"></div>
@@ -393,5 +392,19 @@ function getSize(p) {
           item_box.innerHTML=str
          }
       })
+      //删除
+      function deletes(a){
+        // alert(1)
+        $.ajax({
+          url:href+'/users/delete',
+          type:'get',
+          data:{
+            uid:a
+          },
+          success(data){
+            console.log(data)
+          }
+        })
+      }
     </script>
 </html>

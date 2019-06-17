@@ -226,7 +226,7 @@
                     </a> 
                 </div>
                 <div class="col-md-5" style="height: 200px;line-height: 340px;text-align: right;">
-                    <span style="text-align: center;padding: 10px;margin: 5px;background: #bf2c24;border: 1px solid #bf2c24;" class="add_bookcase" id="add_bookcase" onclick='abc("${data[i].xs_cover}","${data[i].xs_name}","encodeURI(${data[i].xs_author})","${data[i].xs_content}","${login_data.uid}")'>加入书架</span>
+                    <span style="text-align: center;padding: 10px;margin: 5px;background: #bf2c24;border: 1px solid #bf2c24;" class="add_bookcase" id="add_bookcase" onclick='abc("${data[i].xs_cover}","${data[i].xs_name}","${data[i].xs_author}","${data[i].xs_content}","${login_data.uid}")'>加入书架</span>
                     <span style="text-align: center; padding: 10px;margin: 5px;border: 1px solid lightblue;" class="read" id="read">立即阅读</span>
                 </div>
             </li> 
@@ -242,7 +242,7 @@
         // book123()
         //六本书
         function abc(a,b,c,d,e){
-            alert(123)
+            // alert(123)
             $.ajax({
                 url:href+'/users/bookrack',
                 type:'post',
@@ -257,7 +257,7 @@
                     console.log(data)
                     if(data=='ok'){
                         alert('加入成功')
-                        // location.href='personal_center.html'
+                        location.href='personal_center.html'
                     }else{
                         alert('已经加入书架了')
                     }
@@ -277,7 +277,7 @@
                   <img src="${data[i].xs_cover}" alt="">
                 </div>
                 <h3 class="col-md-7" style="font-size: 20px;padding-top: 10px;" id="txt_name">${data[i].xs_name}</h3>
-                <p class="col-md-7"style="font-size:14px;height: 140px;" id="txt_intro">　　
+               <p class="col-md-7"style="font-size:14px;height: 140px;" id="txt_intro" onclick = "adc('${data[i].xs_cover}','${data[i].xs_name}','${data[i].xs_content}','${data[i].xs_author}')">　　
                    ${data[i].xs_content}
                 </p>
                 <a href="#" class="col-md-7" style="text-decoration: none; font-size: 12px;color: #000;padding-top: 30px;">
@@ -294,8 +294,15 @@
         })
         // 加入书架
         function book123(a,b,c,d,e){
-            alert(123)
+            // alert(123)
             
+        }
+        //点书进评论
+        function adc(q,w,e,r){
+            // alert(1)
+            // location.href='comment.html';
+            console.log()
+
         }
     </script>
 </html>
