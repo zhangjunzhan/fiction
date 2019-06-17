@@ -22,7 +22,7 @@
         .out_item_box{position: absolute;top: 0;left: 20px;font-size: 14px;color: #000;}
         .out_item_box:hover{color: rgb(235, 60, 60);cursor: pointer;transition: .4s;}
         .item{height: 200px;padding-top: 10px;;}
-        .img{width:140px;height: 200px; background: hotpink;}
+        .img{width:140px;height: 200px;}
         .img img{width: 100%;height: 100%;padding: 10px;border-radius: 15px;}
         .txt_title{width: 300px;text-align: center;}
         .txt_intro{width: 300px;text-align: center;font-size: 14px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;text-indent:2em;}
@@ -82,9 +82,9 @@
                     <div class="messages fl" style="margin: 0 20px;" id="messages">
                         <h4 class="txt_title" id="txt_title">掉头发的苦逼生活</h4>
                         <p class="txt_intro" id="txt_intro">
-                            某天，宋书航意外加入了一个仙侠中二病资深患者的交流群，里面的群友们都以‘道友’相称，群名片都是各种府主、洞主、真人、天师。连群主走失的宠物犬都称为大妖犬离家出走。整天聊的是炼丹、闯秘境、炼功经验啥的。
+                            <!-- 某天，宋书航意外加入了一个仙侠中二病资深患者的交流群，里面的群友们都以‘道友’相称，群名片都是各种府主、洞主、真人、天师。连群主走失的宠物犬都称为大妖犬离家出走。整天聊的是炼丹、闯秘境、炼功经验啥的。
                             突然有一天，潜水良久的他突然发现……群里每一个群员，竟然全部是修真者，能移山倒海、长生千年的那种！
-                            啊啊啊啊，世界观在一夜间彻底崩碎啦！
+                            啊啊啊啊，世界观在一夜间彻底崩碎啦！ -->
                         </p>
                         <p class="author" id="author">作者：<a href="#"><span class="txt_author" id="txt_author">人间失格</span></a></p>
                     </div>
@@ -312,7 +312,6 @@ function getSize(p) {
       console.log(login_data)
       //小说封面
       add_img.onchange=function(){
-        alert(1);
         var f = add_img.files[0];
         var d = new FormData;
         d.append('img',f)
@@ -349,7 +348,7 @@ function getSize(p) {
               alert('录入成功');
               add_box.style.display='none';
               item_box.style.display='block'
-
+              location.href='type_in.html'
             }else{
               alert('录入失败')
             }

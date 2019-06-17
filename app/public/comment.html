@@ -20,10 +20,10 @@
         em,i,b{font-style: normal;}
         .content{width: 60%;margin: 0 auto;}
         .txt{height: 380px; position: relative;border-bottom: 1px solid;}
-        .Img{width: 200px;height: 300px;padding: 40px;}
-        .Img img{width: 100%;height: 100%;}
+        /*.Img{width: 200px;height: 300px;padding: 40px;}
+        .Img img{width: 100%;height: 100%;}*/
         .message{width: 400px;}
-        .txt_name{padding:40px 0 20px 0}
+        .txt_name{padding:20px 0 20px 0}
         .txt_intro{padding-top: 20px;font-size: 12px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;}
         .txt_author{color: #000;}
         .txt_author:hover{color: red;transition: .5s;}
@@ -60,7 +60,7 @@
                 <h3 class="txt_name" id="txt_name">小说名字</h3>
                 <div style="font-size: 14px;"><a href="#" class="txt_author" id="txt_author">人间失格</a>&nbsp;&nbsp;&nbsp;&nbsp;著</div>
                 <p class="txt_intro" id="txt_intro">修仙觅长生，热血任逍遥，踏莲曳波涤剑骨，凭虚御风塑圣魂！</p>
-                <div class="number" style="font-size: 14px;"><span class="num" id="num">15</span> 人评价</div>
+                <div class="number" style="font-size: 14px;"><span class="num" id="num">n</span> 人评价</div>
             </div>
         </div>
         <!-- 目录  评论 -->
@@ -121,9 +121,8 @@
         console.log(login_data)
         var str = location.href.split('?')[1];
         var str1 =decodeURI(str);
-        // console.log(str1)
         var json = {};
-       
+        
         var arr2 = str1.split('&')  
         console.log(arr2)
         for(var j=0;j<arr2.length;j++){
@@ -131,13 +130,12 @@
            json[arr3[0]] = arr3[1]
         }
         console.log(json)
-        Img.innerHTML=` <img src="${login_data.img}" alt="" style="width:200px;height:300px">
+        Img.innerHTML=` <img src="${login_data.img}" alt="" style="width:200px;height:300px;margin:40px;">
         `
         txt_name.innerHTML =`${json.mz}`
         txt_author.innerHTML = `${json.zz}`
         txt_intro.innerHTML = `${json.nr}`
         discuss_btn.onclick = function(){
-            // alert(1)
             $.ajax({
                 url:href+'/users/comment',
                 type:'post',
@@ -151,6 +149,11 @@
                     console.log(data)
                     if(data=='ok'){
                         alert('评论成功')
+                        $('#add_discuss').modal('hide')   
+                        var lis=document.querySelectorAll('#discuss_list>li')
+                        console.log(lis)
+                        num.innerText=lis.length+1;
+                        // location.href='comment.html'
                     }
                 }
             })

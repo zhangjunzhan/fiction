@@ -83,7 +83,7 @@
             for(var i=0;i<data.length;i++){
                 str+=`
                     <div class="col-md-12" style="padding:0;" id="item">
-                <div class="col-md-2" style="height: 280px;background: limegreen;margin: 10px;" id="txt_img">
+                <div class="col-md-2" style="height: 280px;margin: 10px;" id="txt_img">
                   <img src="${data[i].xsimg}" alt="">
                 </div>
                 <div class="col-md-3">
@@ -111,10 +111,7 @@
             item_box.innerHTML=str
         }
       })
-      // abc()
-      // 删除
       function abc(a){
-        // alert(1)
         $.ajax({
             url:href+'/users/delete',
             type:'get',
@@ -123,15 +120,9 @@
             },
             success(data){
                 console.log(data)
-                // abc()
                 location.href='personal_center.html'
             }
         })
       }
-      //评论
-      // function comment(){
-      //   // alert(1)
-      //   location.href='comment.html'
-      // }
     </script>
 </html>

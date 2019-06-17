@@ -19,7 +19,7 @@
         #txt_name{word-wrap:break-word}
         #txt_name:hover{color: red;transition: .2s;cursor: pointer;}
         #txt_intro{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 7;overflow: hidden;}
-        #txt_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;text-decoration:underline;}
+        #txt_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;}
         .txt_author{color: #ccc;}
         #txt_author:hover{color: #000;transition: .2s;}
         #search_list_intro:hover{color: rgb(187, 28, 28);transition: .1s;cursor: pointer;text-decoration:underline;}
@@ -43,8 +43,8 @@
 <body>
     <div class="container">
         <!-- 默认显示的登录 -->
-        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px;">
-            <div class="btn_box" style="float:right;" id="yc_l">
+        <div class="row clearfix" style="height: 30px;background: #f7f7f7;line-height: 30px;" id="yc_l">
+            <div class="btn_box" style="float:right;" >
                 <span id="btn_in" data-toggle="modal" data-target="#enter">登录</span>
                 / <span id="btn_up">注册</span>
             </div>
@@ -159,8 +159,6 @@
         }
        //登录
         deng5.onclick = function(){
-        // alert(1)
-            // $.ajax([url, ][settings])
             $.ajax({
                 url:href+'/users/ins',
                 type:'post',
@@ -174,13 +172,12 @@
                         alert('账号密码不匹配')
                     }else{
                         alert('登录成功')
-                        localStorage.login = JSON.stringify(data)
-                        console.log(localStorage.login);
                         $('#enter').modal('hide');
                         yc_l.style.display='none';
                         xs_l.style.display='block';
                         name_z.innerText=`${data.names}`
-
+                        localStorage.login = JSON.stringify(data)
+                        console.log(localStorage.login);
                     }
                 }
             })
@@ -188,21 +185,21 @@
         //退出登录
         btn_out.onclick = function(){
             yc_l.style.display='block';
-            xs_l.style.display='none'; 
+            xs_l.style.display='none';
+            localStorage.clear();
         }
         if(localStorage.login){
              yc_l.style.display='none';
             xs_l.style.display='block';
             var login_data = JSON.parse(localStorage.login);
             console.log(login_data)
-             name_z.innerText=login_data.names
+            name_z.innerText=login_data.names
 
         }
         //搜索
         search_btn.onclick = function(){
             var login_data = JSON.parse(localStorage.login);
             console.log(login_data)
-            alert(1);
             $.ajax({
                 url:href+'/users/search',
                 type:'get',
@@ -214,8 +211,8 @@
                     var str=''
                     for(var i=0;i<data.length;i++){
                         str+=`
-                                  <li class="col-md-12" style="height: 200px;background: orchid;padding: 0;">
-                <div class="col-md-2" style="height: 200px;background: aquamarine;padding: 10px;" id="search_list_img">
+                                  <li class="col-md-12" style="height: 200px;padding: 0;">
+                <div class="col-md-2" style="height: 200px;padding: 10px;" id="search_list_img">
                     <img src="${data[i].xs_cover}" alt="" >
                 </div>
                 <div class="col-md-4">
@@ -229,7 +226,7 @@
                     </a> 
                 </div>
                 <div class="col-md-5" style="height: 200px;line-height: 340px;text-align: right;">
-                    <span style="text-align: center;padding: 10px;margin: 5px;background: #bf2c24;border: 1px solid #bf2c24;" class="add_bookcase" id="add_bookcase" onclick="book('${data[i].xs_cover}','${data[i].xs_name}','${data[i].xs_author}','${data[i].xs_content}','${login_data.uid}')">加入书架</span>
+                    <span style="text-align: center;padding: 10px;margin: 5px;background: #bf2c24;border: 1px solid #bf2c24;" class="add_bookcase" id="add_bookcase" onclick='abc("${data[i].xs_cover}","${data[i].xs_name}","encodeURI(${data[i].xs_author})","${data[i].xs_content}","${login_data.uid}")'>加入书架</span>
                     <span style="text-align: center; padding: 10px;margin: 5px;border: 1px solid lightblue;" class="read" id="read">立即阅读</span>
                 </div>
             </li> 
@@ -242,7 +239,31 @@
                 }
             })
         }
+        // book123()
         //六本书
+        function abc(a,b,c,d,e){
+            alert(123)
+            $.ajax({
+                url:href+'/users/bookrack',
+                type:'post',
+                data:{
+                     xsimg: a,
+                     xsname:b,
+                     xsauthor:c,
+                     xstext:d,
+                     loginid:e
+                },
+                success(data){
+                    console.log(data)
+                    if(data=='ok'){
+                        alert('加入成功')
+                        // location.href='personal_center.html'
+                    }else{
+                        alert('已经加入书架了')
+                    }
+                }
+            })
+        }
         $.ajax({
             url:href+'/users/sex',
             type:'get',
@@ -251,12 +272,12 @@
                 var str = ''
                 for(var i=0;i<data.length;i++){
                     str+=`
-                        <div class="col-md-4" style="height: 300px;padding: 0;" id="item">
+            <div class="col-md-4" style="height: 300px;padding: 0;" id="item">
                 <div class="col-md-5" style="background:lightskyblue;height: 240px;padding: 0;margin-top: 30px;" id="txt_img">
                   <img src="${data[i].xs_cover}" alt="">
                 </div>
                 <h3 class="col-md-7" style="font-size: 20px;padding-top: 10px;" id="txt_name">${data[i].xs_name}</h3>
-                <p class="col-md-7"style="font-size:14px;height: 144px;" id="txt_intro">　　
+                <p class="col-md-7"style="font-size:14px;height: 140px;" id="txt_intro">　　
                    ${data[i].xs_content}
                 </p>
                 <a href="#" class="col-md-7" style="text-decoration: none; font-size: 12px;color: #000;padding-top: 30px;">
@@ -272,28 +293,9 @@
             }
         })
         // 加入书架
-        function book(a,b,c,d,e){
-            alert(1)
-            $.ajax({
-                url:href+'/users/bookrack',
-                type:'post',
-                data:{
-                     xsimg: a,
-                     xsname:b,
-                     xsauthor:c,
-                     xstext:d,
-                     loginid:e
-                },
-                success(data){
-                    console.log(data)
-                    if(data=='ok'){
-                        alert('加入成功')
-                        location.href='personal_center.html'
-                    }else{
-                        alert('已经加入书架了')
-                    }
-                }
-            })
+        function book123(a,b,c,d,e){
+            alert(123)
+            
         }
     </script>
 </html>

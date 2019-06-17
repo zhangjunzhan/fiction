@@ -65,7 +65,6 @@ router.post('/entering',(req,res) => {
 			if(data.length){
 				res.send('账号已存在');
 			}else{
-				// res.send('可以录入')
 				pool.conn({
 					arr:[json.xs_name,json.xs_author,json.xs_cover,json.xs_content,json.xs_uid,json.xs_zj],
 					sql:'insert into fiction_type(xs_name,xs_author,xs_cover,xs_content,xs_uid,xs_zj)values(?,?,?,?,?,?)',
